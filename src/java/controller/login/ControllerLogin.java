@@ -45,16 +45,20 @@ public class ControllerLogin extends HttpServlet {
         String _request =  request.getServletPath();
         String urlresponse = "";
         switch(_request){
-            case "Login":
-                urlresponse ="";
+            case "/Login":
+                urlresponse =".";
                 String contrasenna = request.getParameter("contrasena");
                 String id_usuario = request.getParameter("cedula");
                 Usuario u = Service.singleton().crear_usuario(new Usuario(id_usuario, "", contrasenna, "", "", 0, ""));
-                model.setCurrent_user(u);
-                HttpSession session = request.getSession(true);
-                request.setAttribute("ModelLogin", model);//No se debe mandar el modelo, ya que es una instancia
-                //a sesión general debe ser manejada por el objeto httpsession debido a que es el cookie quien va a identificar
-                session.setAttribute("Usuario", u);
+                if(u!=null){
+                    model.setCurrent_user(u);
+                    HttpSession session = request.getSession(true);
+                    request.setAttribute("ModelLogin", model);//No se debe mandar el modelo, ya que es una instancia
+                    //a sesión general debe ser manejada por el objeto httpsession debido a que es el cookie quien va a identificar
+                    session.setAttribute("Usuario", u);
+                    urlresponse="view/profile/profile.jsp";
+                }
+                
                 
                 
                 request.getRequestDispatcher(urlresponse).forward(request, response);
