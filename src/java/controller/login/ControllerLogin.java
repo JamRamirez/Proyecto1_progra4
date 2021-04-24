@@ -8,6 +8,8 @@ package controller.login;
 import Service.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +23,7 @@ import model.usuario.ModelLogin;
  *
  * @author jamca
  */
-@WebServlet(name = "ControllerLogin", urlPatterns = {"/ControllerLogin","/Login"})
+@WebServlet(name = "ControllerLogin", urlPatterns = {"/ControllerLogin","/Login","/CerrarSesion"})
 public class ControllerLogin extends HttpServlet {
 
     /**
@@ -38,30 +40,62 @@ public class ControllerLogin extends HttpServlet {
     private ModelLogin model;
     private Service service;
             
-            
+    public ControllerLogin() {
+        this.service = new Service();
+        this.model = new ModelLogin();
+    }        
             
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String _request =  request.getServletPath();
         String urlresponse = "";
+        
         switch(_request){
             case "/Login":
                 urlresponse =".";
                 String contrasenna = request.getParameter("contrasena");
                 String id_usuario = request.getParameter("cedula");
-                Usuario u = Service.singleton().crear_usuario(new Usuario(id_usuario, "", contrasenna, "", "", 0, ""));
-                if(u!=null){
-                    model.setCurrent_user(u);
-                    HttpSession session = request.getSession(true);
-                    request.setAttribute("ModelLogin", model);
-                    session.setAttribute("Usuario", u);
-                    urlresponse="view/profile/profile.jsp";
+                System.out.println(id_usuario);
+                System.out.println(contrasenna+"\n");
+                Usuario u;
+                try {
+                    
+                    u = Service.singleton().login(new Usuario(id_usuario, "", contrasenna, "", "", 0, ""));
+                    if(u!=null){
+                        System.out.println("NO NULL-------------------------------------");
+                        model.setCurrent_user(u);
+                        HttpSession session = request.getSession(true);
+                        request.setAttribute("ModelLogin", model);
+                        session.setAttribute("Usuario", u);
+                        urlresponse="view/profile/profile.jsp";
+                    }
+                    else{
+                        System.out.println(" NULL-------------------------------------");
+                    }
+                
+                
+                    request.getRequestDispatcher(urlresponse).forward(request, response);
+                    break;
                 }
+                catch (Exception ex) {
+                    Logger.getLogger(ControllerLogin.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+                break;
+           
+            case "/CerrarSesion":
+                System.out.println("Cerrar Sesion case-----");
+                urlresponse = "index.jsp";
+                HttpSession session = request.getSession(true);
+                session.removeAttribute("Usuario");
                 
-                
+                model.setCurrent_user(null);         
+                System.out.println("request disptcher----------");   
                 
                 request.getRequestDispatcher(urlresponse).forward(request, response);
                 break;
+                
             
             
             default:

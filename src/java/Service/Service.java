@@ -66,7 +66,7 @@ public class Service {
          try{
             result=usuarioDao.create(u);
             System.out.println(u.getCedula());
-              return result;
+            return result;
          }
          catch(Exception e){
            return null ;//usuario ya existe 

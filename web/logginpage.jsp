@@ -22,7 +22,7 @@
         <form action="Login" method="POST">
             <div class="mb-3">
                <label for="cedula" class="form-label">Identificacion</label>
-               <input type="text" class="form-control" id="cedula" name ="contrasena" >
+               <input type="text" class="form-control" id="cedula" name ="cedula" >
            </div>
             
             <div class="mb-3">

@@ -38,8 +38,9 @@ public class DaoUsuarios {
         String sqlcommand = "select * from usuarios where id = ?";
         System.out.println("Ingresando a la DB");
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);
-        System.out.print("Buscando Usuario en DB");
+        System.out.print("Buscando Usuario en DB*********************");
         stm.setString(1, id);
+        System.out.println(id+"--------------------------");
         ResultSet rs =  Database.instance().executeQuery(stm); 
         if (rs.next()) {
             System.out.println("Usuario encontrado base de datos");
@@ -63,7 +64,7 @@ public class DaoUsuarios {
             r.setTelefono(rs.getString("telefono"));
             r.setCorreo(rs.getString("email"));
             r.setRol(rs.getInt("rol"));
-            r.setEspecialidad(rs.getString("expecialidad"));
+            r.setEspecialidad(rs.getString("especialidad"));
             System.out.println("Usuario Creado");
             return r;
         } catch (SQLException ex){
