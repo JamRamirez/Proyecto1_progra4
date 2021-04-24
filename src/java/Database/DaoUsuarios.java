@@ -34,7 +34,7 @@ public class DaoUsuarios {
     }
     
     public Usuario read(String id) throws Exception{
-        
+        System.out.println("READ USUARIOS----- 1");
         String sqlcommand = "select * from usuarios where id = ?";
         System.out.println("Ingresando a la DB");
         PreparedStatement stm = Database.instance().prepareStatement(sqlcommand);

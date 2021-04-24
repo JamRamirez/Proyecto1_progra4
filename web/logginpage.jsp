@@ -14,7 +14,10 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>Loggin</title>
     </head>
+    
+     <%@include file ="navbar.jsp"%>
     <body>
+    
         <h1>Loggin</h1>
         <form action="Login" method="POST">
             <div class="mb-3">
@@ -27,11 +30,7 @@
               <input type="password" class="form-control" id="contrasena" name="contrasena" aria-describedby="logginhelp">
               <div id="logginhelp" class="form-text">Nunca se compartira la informacion con nadie mas</div>
             </div>
-            
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
+      
             
             <button type="submit" class="btn btn-primary">Iniciar sesion</button>
         </form>

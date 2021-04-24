@@ -53,8 +53,7 @@ public class ControllerLogin extends HttpServlet {
                 if(u!=null){
                     model.setCurrent_user(u);
                     HttpSession session = request.getSession(true);
-                    request.setAttribute("ModelLogin", model);//No se debe mandar el modelo, ya que es una instancia
-                    //a sesión general debe ser manejada por el objeto httpsession debido a que es el cookie quien va a identificar
+                    request.setAttribute("ModelLogin", model);
                     session.setAttribute("Usuario", u);
                     urlresponse="view/profile/profile.jsp";
                 }

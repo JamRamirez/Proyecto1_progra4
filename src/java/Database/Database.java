@@ -40,8 +40,9 @@ public class Database extends MysqlDataSource{
     }
     
     public Database(){
-         System.out.println("Prueba 1");
-        cnx=this.getConnection();            
+        System.out.println("ENTRANDO CONSTRUCTOR DB");
+        cnx=this.getConnection();        
+        System.out.println("Contructor DB----- 1");
     }
     public Connection getConnection() {
         try {

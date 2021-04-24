@@ -12,7 +12,7 @@ import logic.*;
 
 /**
  *
- * @author pgat3000
+ * @author jamca
  */
 public class Service {
     private DaoUsuarios usuarioDao;
@@ -91,11 +91,5 @@ public class Service {
         
         return result;
     }
-    
-    //falta solo de implementar en service, ya exise el metodo en dao respectivo
-    //FALTA leer grupos por curso
-    //FALTA LEER profesor por grupo
-    //FALTAleer grupos por profe
-    //FALTAgrupos por estudiante(historial)
-    //FALTAEstudiantes por grupo
+
 }
